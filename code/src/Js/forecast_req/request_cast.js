@@ -13,6 +13,7 @@ let response = async function(cidade){
 module.exports = {
   today : function(cidade){
     let cast = response(cidade).then(function(json){
+      console.log(json)//tentar isso
       return forecast.today(json);
     })
     return cast;
