@@ -1,4 +1,4 @@
-import {next_days_form, today_form} from  './forecast.js';
+let form = require('./forecast.js');
 
 let response = async function(cidade){
   const fetch = require('node-fetch');
@@ -9,17 +9,18 @@ let response = async function(cidade){
   });
   return resp;
 }
+module.exports= {
+  today: function (cidade){
+    let cast = response(cidade).then(function(json){
+      return form.today_form(json);
+    })
+    return cast;
+  },
 
-export function today(cidade){
-  let cast = response(cidade).then(function(json){
-    return today_form(json);
-  })
-  return cast;
-}
-
-export function next_days(cidade){
-  let cast = response(cidade).then(function(json){
-    return next_days_form(json);
-  })
-  return cast;
-}
+  next_days: function (cidade){
+    let cast = response(cidade).then(function(json){
+      return form.next_days_form(json);
+    })
+    return cast;
+  }
+};
