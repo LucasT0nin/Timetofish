@@ -7,16 +7,86 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
-    <div id="tester" style="width:600px;height:250px;"></div>
+    <label>Selecione cidade</label>
+    <select id = "sel" onchange="selF()">
+      <option value = 0>--select--</option>
+      <option value = 1>São Paulo</option>
+      <option value = 2>Santos</option>
+      <option value = 3>Juiz de Fora</option>
+    </select>
+
+    <div id="grafico1" style="width:600px;height:250px;"></div>
+    <div id="grafico2" style="width:600px;height:250px;"></div>
+    <div id="grafico3" style="width:600px;height:250px;"></div>
     <script>
-      TESTER = document.getElementById('tester');
-      const url_runner = "./req.json";
-      
-      axios.get(url_runner).then(function(response){
-          Plotly.newPlot(TESTER, response.data['dados'], response.data['layout']);
+      const url_runner = [
+        "./req1.json",
+        "./req2.json",
+        "./req3.json"
+      ];
+
+      G1= document.getElementById('grafico1');
+
+      axios.get(url_runner[0]).then(function(response){
+          Plotly.newPlot(G1, response.data['dados'], response.data['layout']);
       }).catch(function (error) {
         console.log(error);
-      })
+      });
+      document.getElementById('grafico1').style.display = 'none';
+
+      G2= document.getElementById('grafico2');
+
+      axios.get(url_runner[1]).then(function(response){
+          Plotly.newPlot(G2, response.data['dados'], response.data['layout']);
+      }).catch(function (error) {
+        console.log(error);
+      });
+      document.getElementById('grafico2').style.display = 'none';
+
+      G3= document.getElementById('grafico3');
+      axios.get(url_runner[2]).then(function(response){
+          Plotly.newPlot(G3, response.data['dados'], response.data['layout']);
+      }).catch(function (error) {
+        console.log(error);
+      });
+      document.getElementById('grafico3').style.display = 'none';
+      /*let j = 1;
+      for(let i = 0; i<3; i++){
+        console.log(j)
+        let grafico = 'grafico' + j++;
+        G= document.getElementById(grafico);
+        axios.get(url_runner[i]).then(function(response){
+            Plotly.newPlot(G, response.data['dados'], response.data['layout']);
+        }).catch(function (error) {
+          console.log(error);
+        });
+        document.getElementById(grafico).style.display = 'none';
+      }*/
+    </script>
+    <script type='text/javascript'>
+      function selF(){
+        var dropdown = document.getElementById("sel").value;
+        if(dropdown == 0){
+          document.getElementById('grafico1').style.display = 'none';
+          document.getElementById('grafico2').style.display = 'none';
+          document.getElementById('grafico3').style.display = 'none';
+        }
+        if(dropdown == 1){
+          document.getElementById('grafico1').style.display = 'block';
+          document.getElementById('grafico2').style.display = 'none';
+          document.getElementById('grafico3').style.display = 'none';
+        }
+        if(dropdown == 2){
+          document.getElementById('grafico1').style.display = 'none';
+          document.getElementById('grafico2').style.display = 'block';
+          document.getElementById('grafico3').style.display = 'none';
+        }
+        if(dropdown == 3){
+          document.getElementById('grafico1').style.display = 'none';
+          document.getElementById('grafico2').style.display = 'none';
+          document.getElementById('grafico3').style.display = 'block';
+        }
+      }
     </script>
   </body>
 </html>

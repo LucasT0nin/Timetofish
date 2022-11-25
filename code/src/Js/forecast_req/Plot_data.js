@@ -2,8 +2,8 @@ let cast = require('./request_cast.js');
 
 module.exports = {
   layout :  {
-    xaxis: {range: [0, 50], title: "Temperatura Máxima"},
-    yaxis: {title: "Dia da Semana"},
+    xaxis: {title: "Dias da Semana"},
+    yaxis: {title: "Temperatura Máxima"},
     title: "Temperatura Maxima por Dia"
   },
 
@@ -35,8 +35,8 @@ module.exports = {
     Y[2] = nD[1];
     Y[3] = nD[2];
     return [{
-      x: X,
-      y: Y,
+      x: Y,
+      y: X,
       mode: "lines",
       type: "scatter"
     }];

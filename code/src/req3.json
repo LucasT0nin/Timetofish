@@ -1,0 +1,1 @@
+{"dados":[{"x":["Hoje","Sáb","Dom","Seg"],"y":[24,22,22,23],"mode":"lines","type":"scatter"}],"layout":{"xaxis":{"title":"Dias da Semana"},"yaxis":{"title":"Temperatura Máxima"},"title":"Temperatura Maxima por Dia"}}

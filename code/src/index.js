@@ -49,14 +49,21 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 let plotter = require('./utils.js');
 var fs = require('fs');
+const cidades = [
+  '455827',
+  '455991',
+  '455875'
+];
 
-plotter.castPlotter().then(function(data){
-  var dict = JSON.stringify({
-    "dados" : data[0],
-    "layout" : data[1]
+for (let i = 0; i<3; i++){
+  plotter.castPlotter(cidades[i]).then(function(data){
+    var dict = JSON.stringify({
+      "dados" : data[0],
+      "layout" : data[1]
+    });
+    let fileind = i+1;
+    fs.writeFile(("./src/req"+ fileind  +".json"), dict, function(err, result) {
+      if(err) console.log('error', err);
+    });
   });
-
-  fs.writeFile("./src/req.json", dict, function(err, result) {
-    if(err) console.log('error', err);
-  });
-});
+}
